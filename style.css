@@ -1,0 +1,723 @@
+:root {
+  --primary: #0f172a;
+  --secondary: #1e293b;
+  --accent: #22c55e;
+  --text-light: #e5e7eb;
+  --text-muted: #94a3b8;
+  --bg-light: #f8fafc;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", system-ui, sans-serif;
+  background: var(--bg-light);
+}
+
+/* scroll bar body */
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  width: 8px;
+}
+
+html::-webkit-scrollbar-track,
+body::-webkit-scrollbar-track {
+  background: transparent !important;
+}
+
+html::-webkit-scrollbar-thumb,
+body::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.25);
+  border-radius: 10px;
+}
+
+html::-webkit-scrollbar-thumb:hover,
+body::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.45);
+}
+
+/* end off scroll bar body */
+
+/* ===== HEADER ===== */
+.app-header {
+  background: linear-gradient(135deg, #0f172a, #1e293b);
+  color: #f8fafc;
+  padding: 20px 32px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+  position: relative;
+  z-index: 1000;
+}
+
+.header-content {
+  display: flex;
+  align-items: center;
+}
+
+.title-group h1 {
+  margin: 0;
+  font-size: 1.6rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.title-group .subtitle {
+  display: block;
+  margin-top: 4px;
+  font-size: 0.95rem;
+  color: #94a3b8;
+  letter-spacing: 0.3px;
+}
+
+/* aksen garis bawah */
+.app-header::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 4px;
+  width: 100%;
+  background: linear-gradient(to right,
+      #22c55e,
+      #4ade80,
+      #86efac);
+}
+
+/* ===== FOOTER ===== */
+footer {
+  background: var(--primary);
+  color: var(--text-muted);
+  text-align: center;
+  padding: 10px;
+  font-size: 0.85rem;
+}
+
+/* ===== LAYOUT ===== */
+.container {
+  display: flex;
+  height: 85vh;
+}
+
+/* ===== SIDEBAR ===== */
+.sidebar {
+  width: 260px;
+  display: flex;
+  position: relative;
+  transform: none;
+  bottom: auto;
+  background: var(--primary);
+  color: var(--text-light);
+  padding: 20px;
+  flex-direction: column;
+  gap: 20px;
+  height: 85vh;
+  z-index: 2000;
+  overflow-y: auto;
+}
+
+/* scroll bar side  */
+.sidebar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.sidebar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.25);
+  border-radius: 10px;
+}
+
+.sidebar::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.45);
+}
+
+/* end of scroll bar side */
+
+.box-subjudul p {
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.sidebar h3 {
+  margin: 0;
+  font-size: 1.1rem;
+  letter-spacing: 0.5px;
+  font-weight: 600;
+  color: #e5e7eb;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #334155;
+}
+
+/* BASEMAP */
+.form-group {
+  margin-bottom: 8px;
+}
+
+.radio-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.radio-item:hover {
+  background: #1e293b;
+}
+
+.radio-item span {
+  font-size: 0.9rem;
+  color: #e5e7eb;
+}
+
+
+/* LAYER CONTROL */
+/* Judul box */
+.box-subjudul h3 {
+  margin: 0 0 12px 0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #e5e7eb;
+  border-bottom: 1px solid #334155;
+  padding-bottom: 6px;
+}
+
+/* Container tiap item */
+.form-group {
+  margin-bottom: 8px;
+}
+
+/* Label sebagai satu kesatuan */
+.checkbox-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+/* Hover effect */
+.checkbox-item:hover {
+  background: #1e293b;
+}
+
+/* Checkbox asli */
+.checkbox-item input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  accent-color: #22c55e;
+  /* hijau GIS */
+  cursor: pointer;
+}
+
+/* Teks label */
+.checkbox-item span {
+  font-size: 0.9rem;
+  color: #e5e7eb;
+  user-select: none;
+}
+
+
+/* LEGENDA */
+
+/* ===== LEGENDA POTENSI PANEL SURYA ===== */
+
+.legend-panel-surya {
+    margin-top: 12px;
+    padding: 0;
+    overflow: hidden;
+    background: #111827;
+    border: 1px solid #273449;
+    border-radius: 12px;
+    transition: border-color 0.25s ease,
+                box-shadow 0.25s ease;
+}
+
+.legend-panel-surya:hover {
+    border-color: #475569;
+    box-shadow: 0 5px 18px rgba(0, 0, 0, 0.18);
+}
+
+/* Tombol utama */
+
+.legend-surya-button {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 15px;
+    color: #f1f5f9;
+    background: linear-gradient(135deg, #182538, #111827);
+    border: none;
+    cursor: pointer;
+    text-align: left;
+    transition: background 0.25s ease;
+}
+
+.legend-surya-button:hover {
+    background: linear-gradient(135deg, #243449, #172235);
+}
+
+.legend-surya-button:focus-visible {
+    outline: 2px solid #fbbf24;
+    outline-offset: -3px;
+}
+
+.legend-surya-title {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-width: 0;
+}
+
+.legend-surya-icon {
+    width: 42px;
+    height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: 24px;
+    color: #fbbf24;
+    background: rgba(251, 191, 36, 0.12);
+    border: 1px solid rgba(251, 191, 36, 0.25);
+    border-radius: 10px;
+}
+
+.legend-surya-title strong {
+    display: block;
+    margin-bottom: 4px;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.2px;
+}
+
+.legend-surya-title small {
+    display: block;
+    color: #94a3b8;
+    font-size: 11px;
+    font-weight: 400;
+}
+
+.legend-surya-toggle {
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    color: #fbbf24;
+    background: #253247;
+    border: 1px solid #334155;
+    border-radius: 8px;
+    font-size: 19px;
+    transition: transform 0.25s ease,
+                background 0.25s ease;
+}
+
+/* Isi legenda */
+
+.legend-surya-content {
+    display: none;
+    padding: 15px;
+    border-top: 1px solid #273449;
+    animation: legendSuryaFade 0.25s ease;
+}
+
+.legend-surya-info {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 14px;
+    color: #94a3b8;
+    font-size: 11px;
+    line-height: 1.5;
+}
+
+.legend-info-dot {
+    width: 7px;
+    height: 7px;
+    flex-shrink: 0;
+    background: #fbbf24;
+    border-radius: 50%;
+    box-shadow: 0 0 8px rgba(251, 191, 36, 0.5);
+}
+
+.legend-surya-items {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.legend-surya-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    background: #172235;
+    border: 1px solid transparent;
+    border-radius: 8px;
+    transition: background 0.2s ease,
+                border-color 0.2s ease,
+                transform 0.2s ease;
+}
+
+.legend-surya-item:hover {
+    background: #202e42;
+    border-color: #334155;
+    transform: translateX(3px);
+}
+
+/* Kotak warna peta */
+
+.legend-surya-color {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 5px;
+    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.05);
+}
+
+.warna-sangat-tinggi {
+    background: #d7191c;
+}
+
+.warna-tinggi {
+    background: #fdae61;
+}
+
+.warna-sedang {
+    background: #ffffbf;
+}
+
+.warna-rendah {
+    background: #2c7bb6;
+}
+
+.legend-surya-label {
+    flex: 1;
+    color: #e2e8f0;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+/* Badge singkat di sebelah kanan */
+
+.legend-surya-level {
+    min-width: 27px;
+    padding: 4px 6px;
+    text-align: center;
+    font-size: 10px;
+    font-weight: 700;
+    border-radius: 5px;
+}
+
+.level-merah {
+    color: #fca5a5;
+    background: rgba(215, 25, 28, 0.15);
+}
+
+.level-oranye {
+    color: #fdba74;
+    background: rgba(253, 174, 97, 0.15);
+}
+
+.level-kuning {
+    color: #fef08a;
+    background: rgba(255, 255, 191, 0.12);
+}
+
+.level-biru {
+    color: #93c5fd;
+    background: rgba(44, 123, 182, 0.18);
+}
+
+/* Footer */
+
+.legend-surya-footer {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    margin-top: 14px;
+    padding-top: 12px;
+    color: #64748b;
+    border-top: 1px solid #273449;
+    font-size: 10px;
+    line-height: 1.5;
+}
+
+.legend-surya-footer span:first-child {
+    color: #fbbf24;
+    font-size: 15px;
+}
+
+@keyframes legendSuryaFade {
+    from {
+        opacity: 0;
+        transform: translateY(-5px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Tampilan layar kecil */
+
+@media (max-width: 480px) {
+    .legend-surya-button {
+        padding: 12px;
+    }
+
+    .legend-surya-content {
+        padding: 12px;
+    }
+
+    .legend-surya-icon {
+        width: 38px;
+        height: 38px;
+        font-size: 21px;
+    }
+
+    .legend-surya-title strong {
+        font-size: 13px;
+    }
+
+    .legend-surya-item {
+        padding: 9px;
+    }
+}
+
+/* ==== POP UP ==== */
+.popup-gis .leaflet-popup-content-wrapper {
+    background: #111827;
+    color: #f9fafb;
+    border: 1px solid #374151;
+    border-radius: 14px;
+    padding: 0;
+    overflow: hidden;
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.35);
+}
+
+.popup-gis .leaflet-popup-content {
+    margin: 0;
+    width: 280px !important;
+    max-width: calc(100vw - 80px);
+}
+
+.popup-gis .leaflet-popup-tip {
+    background: #111827;
+}
+
+.popup-gis .leaflet-popup-close-button {
+    color: #d1d5db !important;
+    font-size: 22px !important;
+    padding: 8px 10px 0 0 !important;
+}
+
+/* CONTAINER */
+.popup-provinsi {
+    font-family: Arial, sans-serif;
+    overflow: hidden;
+}
+
+/* HEADER */
+.popup-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 18px 16px;
+    background: linear-gradient(135deg, #064e3b, #111827);
+    border-bottom: 1px solid #374151;
+}
+
+.popup-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 42px;
+    height: 42px;
+    background: rgba(52, 211, 153, 0.14);
+    border: 1px solid rgba(52, 211, 153, 0.3);
+    border-radius: 12px;
+    font-size: 22px;
+}
+
+.popup-title h3 {
+    margin: 0 20px 5px 0;
+    color: #ffffff;
+    font-size: 15px;
+    line-height: 1.4;
+    font-weight: 700;
+}
+
+.popup-title span {
+    color: #6ee7b7;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+}
+
+/* CONTENT */
+.popup-content {
+    padding: 8px 16px;
+}
+
+.popup-item {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    padding: 13px 0;
+    border-bottom: 1px solid #273244;
+}
+
+.popup-item:last-child {
+    border-bottom: none;
+}
+
+.popup-label {
+    color: #9ca3af;
+    font-size: 12px;
+}
+
+.popup-value {
+    color: #f9fafb;
+    font-size: 14px;
+    font-weight: 600;
+    overflow-wrap: anywhere;
+}
+
+/* FOOTER */
+.popup-footer {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 16px;
+    background: #0b1220;
+    color: #9ca3af;
+    font-size: 11px;
+    border-top: 1px solid #273244;
+}
+
+.status-dot {
+    width: 7px;
+    height: 7px;
+    flex-shrink: 0;
+    background: #34d399;
+    border-radius: 50%;
+    box-shadow: 0 0 8px rgba(52, 211, 153, 0.6);
+}
+
+/* RESPONSIVE */
+@media (max-width: 480px) {
+    .popup-gis .leaflet-popup-content {
+        width: 240px !important;
+    }
+
+    .popup-header {
+        padding: 14px 12px;
+    }
+
+    .popup-content {
+        padding: 6px 12px;
+    }
+
+    .popup-footer {
+        padding: 10px 12px;
+    }
+}
+
+
+/* ===== MAP ===== */
+#map {
+  flex: 1;
+  height: 80vh;
+  margin: 10px;
+  border-radius: 10px;
+  border: 2px solid black;
+  background: #e2e8f0;
+  z-index: 1;
+}
+
+
+/* ===============================
+   MOBILE SIDEBAR SLIDE-UP
+================================ */
+.menu-btn {
+  display: none;
+  font-size: 26px;
+  background: none;
+  border: none;
+  color: #f8fafc;
+  cursor: pointer;
+  margin-left: auto;
+}
+
+
+/* Mobile */
+@media (max-width: 768px) {
+
+  .menu-btn {
+    display: block;
+  }
+
+  .container {
+    flex-direction: column;
+    height: auto;
+  }
+
+  /* Sidebar jadi panel bawah */
+  .sidebar {
+    position: fixed;
+    bottom: -100%;
+    left: 0;
+    width: 100%;
+    max-height: 70vh;
+    background: var(--primary);
+    z-index: 2000;
+    transition: bottom 0.3s ease;
+    border-top-left-radius: 14px;
+    border-top-right-radius: 14px;
+    transform: translateY(100%);
+  }
+
+  .sidebar.active {
+    bottom: 0;
+    transform: translateY(0);
+  }
+
+  #map {
+    height: 100vh;
+    margin: 0;
+    border-radius: 0;
+  }
+}
+
+/* Fullscreen MAP */
+.map-fullscreen {
+  position: fixed !important;
+  top: 0;
+  left: 0;
+  width: 100vw !important;
+  height: 100vh !important;
+  z-index: 3000;
+}
+
+@media (max-width: 768px) {
+  #map {
+    height: 100vh;
+    min-height: 100vh;
+    width: 100%;
+  }
+}

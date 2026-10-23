@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" href="aset/icon-spbu.png" />
+  <title>WEB GEO SUMUT</title>
+  <link rel="shortcut icon" href="img/logo.png">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css" />
+</head>
+
+<body>
+
+  <!-- HEADER -->
+  <header class="app-header">
+    <div class="header-content">
+      <div class="title-group">
+        <h1>GeoSumut</h1>
+        <span class="subtitle">Provinsi Sumatera Utara</span>
+      </div>
+      <button id="menuToggle" class="menu-btn">☰</button>
+    </div>
+  </header>
+
+
+  <!-- SIDEBAR -->
+  <main class="container">
+    <aside class="sidebar">
+
+    <!-- BASEMAP -->
+    <div class="box-subjudul">
+        <h3>Pilih Basemap</h3>
+
+        <label class="radio-item">
+            <input type="radio" name="basemap" value="osm" checked>
+            <span>OpenStreetMap (OSM)</span>
+        </label>
+
+        <label class="radio-item">
+            <input type="radio" name="basemap" value="satelite">
+            <span>Satelit</span>
+        </label>
+
+        <label class="radio-item">
+            <input type="radio" name="basemap" value="topo">
+            <span>Topografi</span>
+        </label>
+
+        <label class="radio-item">
+            <input type="radio" name="basemap" value="esri">
+            <span>Esri Street Map</span>
+        </label>
+    </div>
+
+      <!-- LAYER CONTROL -->
+      <div class="box-subjudul">
+        <h3>Layer Control</h3>
+
+        <label class="checkbox-item">
+          <!-- HANYA INI YANG AKTIF -->
+          <input type="checkbox" checked onchange="toggleOverlay('batsProvinsi')">
+          Batas Provinsi
+        </label>
+
+        <label class="checkbox-item">
+          <input type="checkbox" onchange="toggleOverlay('batasKabupaten')">
+          Batas Kabupaten
+        </label>
+
+        <label class="checkbox-item">
+          <input type="checkbox" onchange="toggleOverlay('batasKecamatan')">
+          Batas Kecamatan
+        </label>
+
+        <label class="checkbox-item">
+          <input type="checkbox" onchange="toggleOverlay('batasDesa')">
+          Batas Desa
+        </label>
+
+        <label class="checkbox-item">
+          <input type="checkbox" onchange="toggleOverlay('jalan')">
+          Jalan
+        </label>
+
+        <label class="checkbox-item">
+          <input type="checkbox" onchange="toggleOverlay('sungai')">
+          Sungai
+        </label>
+
+        <label class="checkbox-item">
+          <input type="checkbox" onchange="toggleOverlay('landSurfaceTempereture')">
+          Land Surface Tempereture
+        </label>
+
+        <label class="checkbox-item">
+          <input type="checkbox" onchange="toggleOverlay('petaAdministrasi')">
+          Peta Administrasi
+        </label>
+
+        <label class="checkbox-item">
+          <input type="checkbox" onchange="toggleOverlay('tutupanLahan')">
+          Tutupan Lahan
+        </label>
+
+        <label class="checkbox-item">
+          <input type="checkbox" onchange="toggleOverlay('kemiringanLereng')">
+          Kemiringan Lereng
+        </label>
+
+        <label class="checkbox-item">
+          <input type="checkbox" onchange="toggleOverlay('potensiPanelSurya')">
+          Potensi Panel Surya
+        </label>
+      </div>
+
+      <!-- LEGENDA -->
+      <div class="box-subjudul">
+          <h3>Legenda</h3>
+          <div id="infLegend">
+              <!-- Legenda provinsi atau lainnya -->
+          </div>
+
+          <!-- kabupaten -->
+          <div style="margin-top: 15px;">
+              <button
+                  id="btnLegendKabupaten"
+                  onclick="toggleLegendKabupaten()"
+                  style="width: 100%; padding: 10px; background: #252b38; color: #ffffff; border: 1px solid #3b4558; border-radius: 6px; text-align: left; cursor: pointer;">
+                  <span id="iconLegendKabupaten">＋</span>
+                  Batas Kabupaten/Kota
+              </button>
+
+              <div
+                  id="legendKabupaten"
+                  style="display: none; margin-top: 12px;"
+              ></div>
+          </div>
+
+          <!-- kecamatan -->
+          <div style="margin-top: 12px;">
+              <button
+                  id="btnLegendKecamatan"
+                  onclick="toggleLegendKecamatan()"
+                  style="width: 100%; padding: 10px; background: #252b38; color: #ffffff; border: 1px solid #3b4558; border-radius: 6px; text-align: left; cursor: pointer;">
+                  <span id="iconLegendKecamatan">＋</span>
+                  Batas Kecamatan
+              </button>
+
+              <div
+                  id="legendKecamatan"
+                  style="display: none; margin-top: 12px;"
+              ></div>
+          </div>
+          
+          <!-- desa -->
+          <div style="margin-top: 12px;">
+              <button
+                  id="btnLegendDesa"
+                  onclick="toggleLegendDesa()"
+                  style="width: 100%; padding: 10px; background: #252b38; color: #ffffff; border: 1px solid #3b4558; border-radius: 6px; text-align: left; cursor: pointer;">
+                  <span id="iconLegendDesa">＋</span>
+                  Batas Desa
+              </button>
+
+              <div
+                  id="legendDesa" style="display: none; margin-top: 12px;"
+              ></div>
+          </div>
+          
+        <!-- land surface temperature (LTS) -->
+        <div style="margin-top: 12px;">
+            <button
+                id="btnLegendLST" onclick="toggleLegendLST()"
+                style="width: 100%; padding: 10px; background: #252b38; color: #ffffff; border: 1px solid #3b4558; border-radius: 6px; text-align: left; cursor: pointer;">
+                <span id="iconLegendLST">＋</span>
+                Land Surface Temperature
+            </button>
+
+            <div
+                id="legendLST"
+                style="display: none; margin-top: 12px;"
+            ></div>
+        </div>
+
+      <!-- Peta Administrasi -->
+      <div style="margin-top: 12px;">
+          <button
+              id="btnLegendAdministrasi" onclick="toggleLegendAdministrasi()"
+              style="width: 100%; padding: 10px; background: #252b38; color: #ffffff; border: 1px solid #3b4558; border-radius: 6px; text-align: left; cursor: pointer;">
+              <span id="iconLegendAdministrasi">＋</span>
+              Peta Administrasi
+          </button>
+
+          <div
+              id="legendAdministrasi"
+              style="display: none; margin-top: 12px;"
+          ></div>
+      </div>
+
+      <!-- Tutupan Lahan -->
+      <div style="margin-top: 12px;">
+          <button
+              id="btnLegendTutupanLahan"
+              onclick="toggleLegendTutupanLahan()"
+              style="width: 100%; padding: 10px; background: #252b38; color: #ffffff; border: 1px solid #3b4558; border-radius: 6px; text-align: left; cursor: pointer;">
+              <span id="iconLegendTutupanLahan">＋</span>
+              Tutupan Lahan
+          </button>
+
+          <div
+              id="legendTutupanLahan"
+              style="display: none; margin-top: 12px;"
+          ></div>
+      </div>
+
+      <!-- Kemiringan Lereng -->
+      <div style="margin-top: 12px;">
+          <button
+              id="btnLegendLereng"
+              onclick="toggleLegendLereng()"
+              style="width: 100%; padding: 10px; background: #252b38; color: #ffffff; border: 1px solid #3b4558; border-radius: 6px; text-align: left; cursor: pointer;">
+              <span id="iconLegendLereng">＋</span>
+              Kemiringan Lereng
+          </button>
+
+          <div
+              id="legendLereng"
+              style="display: none; margin-top: 12px;"
+          ></div>
+      </div>
+
+        <!-- Potensi Panel Surya --> 
+        <div class="box-subjudul legend-panel-surya">
+
+            <button
+                type="button"
+                id="btnLegendPanelSurya"
+                class="legend-surya-button"
+                onclick="toggleLegendPanelSurya()"
+                aria-expanded="false"
+                aria-controls="legendPanelSurya"
+            >
+                <span class="legend-surya-title">
+                    <span class="legend-surya-icon">☀</span>
+                    <span>
+                        <strong>Potensi Panel Surya</strong>
+                        <small>Pemetaan energi matahari</small>
+                    </span>
+                </span>
+
+                <span id="iconLegendPanelSurya" class="legend-surya-toggle">＋</span>
+            </button>
+
+            <div id="legendPanelSurya" class="legend-surya-content">
+
+                <div class="legend-surya-info">
+                    <span class="legend-info-dot"></span>
+                    <span>Klasifikasi potensi berdasarkan GHI</span>
+                </div>
+
+                <div class="legend-surya-items">
+
+                    <div class="legend-surya-item">
+                        <span class="legend-surya-color warna-sangat-tinggi"></span>
+                        <span class="legend-surya-label">Sangat Tinggi</span>
+                        <span class="legend-surya-level level-merah">ST</span>
+                    </div>
+
+                    <div class="legend-surya-item">
+                        <span class="legend-surya-color warna-tinggi"></span>
+                        <span class="legend-surya-label">Tinggi</span>
+                        <span class="legend-surya-level level-oranye">T</span>
+                    </div>
+
+                    <div class="legend-surya-item">
+                        <span class="legend-surya-color warna-sedang"></span>
+                        <span class="legend-surya-label">Sedang</span>
+                        <span class="legend-surya-level level-kuning">S</span>
+                    </div>
+
+                    <div class="legend-surya-item">
+                        <span class="legend-surya-color warna-rendah"></span>
+                        <span class="legend-surya-label">Rendah</span>
+                        <span class="legend-surya-level level-biru">R</span>
+                    </div>
+
+                </div>
+
+                <div class="legend-surya-footer">
+                    <span>☀</span>
+                    <span>GHI — Global Horizontal Irradiance</span>
+                </div>
+
+            </div>
+        </div>
+
+
+
+      </div>
+      </aside>
+
+
+    <!-- MAPS -->
+    <section id="map">
+    </section>
+  </main>
+
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
+  <script src="main.js"></script>
+
+  <script>
+    /* =========================
+   SIDEBAR TOGGLE MOBILE
+  ========================= */
+    const menuBtn = document.getElementById("menuToggle");
+    const sidebar = document.querySelector(".sidebar");
+
+    menuBtn.addEventListener("click", () => {
+      sidebar.classList.toggle("active");
+
+      setTimeout(() => {
+        map.invalidateSize();
+      }, 300);
+    });
+
+    document.getElementById("map").offsetHeight
+
+
+    /* =========================
+       MAP FULLSCREEN
+    ========================= */
+    const fullscreenBtn = document.getElementById("fullscreenBtn");
+    const mapEl = document.getElementById("map");
+
+    fullscreenBtn.addEventListener("click", () => {
+      mapEl.classList.toggle("map-fullscreen");
+
+      setTimeout(() => {
+        map.invalidateSize();
+      }, 300);
+
+    });
+
+  </script>
+</body>
+
+</html>
